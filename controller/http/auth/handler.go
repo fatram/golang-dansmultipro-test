@@ -22,7 +22,7 @@ func (ctr *AuthController) Login(c echo.Context) (err error) {
 // Register user godoc
 // @Summary			Register user
 // @Description		Membuat user
-// @Tags         	user
+// @Tags         	Auth
 // @Accept       	json
 // @Accept       	x-www-form-urlencoded
 // @Produce      	json

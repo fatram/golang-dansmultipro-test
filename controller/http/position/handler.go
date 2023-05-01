@@ -5,12 +5,12 @@ import "github.com/labstack/echo/v4"
 // Listposition godoc
 // @Summary			List position
 // @Description		Menampilkan daftar position
-// @Tags         	position
+// @Tags         	Position
 // @Accept       	json
 // @Produce      	json
 // @Param			page number			query	int		false	"page"
 // @Param			page size			query	int		false	"limit"
-// @Success      	200  {object}   model.GetAllModel{data=[]model.Position}
+// @Success      	200  {object}   []model.Position
 // @Failure      	400,401,500  {object}  	pkg.Error
 // @Router       	/positions [get]
 func (ctr PositionController) GetAll(c echo.Context) error {
@@ -20,7 +20,7 @@ func (ctr PositionController) GetAll(c echo.Context) error {
 // Getposition godoc
 // @Summary			Get one position
 // @Description		Menampilkan satu position
-// @Tags         	position
+// @Tags         	Position
 // @Accept       	json
 // @Produce      	json
 // @param 	   		id		path 	string 	true 	"id position"

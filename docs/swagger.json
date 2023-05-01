@@ -76,7 +76,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "Auth"
                 ],
                 "summary": "Register user",
                 "parameters": [
@@ -122,7 +122,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "position"
+                    "Position"
                 ],
                 "summary": "List position",
                 "parameters": [
@@ -143,22 +143,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/model.GetAllModel"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/model.Position"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Position"
+                            }
                         }
                     },
                     "400": {
@@ -192,7 +180,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "position"
+                    "Position"
                 ],
                 "summary": "Get one position",
                 "parameters": [
@@ -239,32 +227,6 @@
             "properties": {
                 "id": {
                     "type": "string"
-                }
-            }
-        },
-        "model.GetAllModel": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {}
-                },
-                "meta": {
-                    "$ref": "#/definitions/model.PageMeta"
-                }
-            }
-        },
-        "model.PageMeta": {
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "integer"
-                },
-                "pages": {
-                    "type": "integer"
-                },
-                "total": {
-                    "type": "integer"
                 }
             }
         },

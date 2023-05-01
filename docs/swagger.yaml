@@ -5,23 +5,6 @@ definitions:
       id:
         type: string
     type: object
-  model.GetAllModel:
-    properties:
-      data:
-        items: {}
-        type: array
-      meta:
-        $ref: '#/definitions/model.PageMeta'
-    type: object
-  model.PageMeta:
-    properties:
-      page:
-        type: integer
-      pages:
-        type: integer
-      total:
-        type: integer
-    type: object
   model.Position:
     properties:
       company:
@@ -148,7 +131,7 @@ paths:
             $ref: '#/definitions/pkg.Error'
       summary: Register user
       tags:
-      - user
+      - Auth
   /positions:
     get:
       consumes:
@@ -169,14 +152,9 @@ paths:
         "200":
           description: OK
           schema:
-            allOf:
-            - $ref: '#/definitions/model.GetAllModel'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/model.Position'
-                  type: array
-              type: object
+            items:
+              $ref: '#/definitions/model.Position'
+            type: array
         "400":
           description: Bad Request
           schema:
@@ -191,7 +169,7 @@ paths:
             $ref: '#/definitions/pkg.Error'
       summary: List position
       tags:
-      - position
+      - Position
   /positions/{id}:
     get:
       consumes:
@@ -224,5 +202,5 @@ paths:
             $ref: '#/definitions/pkg.Error'
       summary: Get one position
       tags:
-      - position
+      - Position
 swagger: "2.0"
