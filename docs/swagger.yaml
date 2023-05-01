@@ -1,0 +1,228 @@
+basePath: /
+definitions:
+  model.CreateResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  model.GetAllModel:
+    properties:
+      data:
+        items: {}
+        type: array
+      meta:
+        $ref: '#/definitions/model.PageMeta'
+    type: object
+  model.PageMeta:
+    properties:
+      page:
+        type: integer
+      pages:
+        type: integer
+      total:
+        type: integer
+    type: object
+  model.Position:
+    properties:
+      company:
+        type: string
+      company_logo:
+        type: string
+      company_url:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      how_to_apply:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  model.TokenResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  model.UserCreate:
+    properties:
+      email:
+        type: string
+      fullname:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  model.UserLogin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  pkg.Error:
+    properties:
+      message: {}
+    type: object
+host: localhost
+info:
+  contact:
+    email: frfatram@gmail.com
+    name: Fatur Rahman
+  description: This is a API server for Simple Job List
+  title: Golang Dans Multi Pro Test Documentation
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      description: Masuk dengan akun user
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.TokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pkg.Error'
+      summary: Login user
+      tags:
+      - Auth
+  /auth/registration:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      description: Membuat user
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UserCreate'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pkg.Error'
+      summary: Register user
+      tags:
+      - user
+  /positions:
+    get:
+      consumes:
+      - application/json
+      description: Menampilkan daftar position
+      parameters:
+      - description: page
+        in: query
+        name: number
+        type: integer
+      - description: limit
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/model.GetAllModel'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Position'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pkg.Error'
+      summary: List position
+      tags:
+      - position
+  /positions/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Menampilkan satu position
+      parameters:
+      - description: id position
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Position'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/pkg.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/pkg.Error'
+      summary: Get one position
+      tags:
+      - position
+swagger: "2.0"
