@@ -138,6 +138,12 @@ paths:
       - application/json
       description: Menampilkan daftar position
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: page
         in: query
         name: number
@@ -146,6 +152,18 @@ paths:
         in: query
         name: size
         type: integer
+      - description: description
+        in: query
+        name: description
+        type: integer
+      - description: location
+        in: query
+        name: location
+        type: integer
+      - description: full_time
+        in: query
+        name: time
+        type: boolean
       produces:
       - application/json
       responses:
@@ -176,6 +194,12 @@ paths:
       - application/json
       description: Menampilkan satu position
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id position
         in: path
         name: id
